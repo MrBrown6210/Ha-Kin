@@ -4,9 +4,9 @@ import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
-    <div className="pl-32 pr-28 mb-3">
+    <div className="md:pl-32 md:pr-28 mb-3">
       <div className="flex justify-between">
-        <div className="mt-16">
+        <div className="mt-16 text-center px-2 md:text-left md:px-0">
           <div className="text-6xl leading-none font-extrabold">Ha kin</div>
           <div className="mt-4 text-sm leading-5 font-medium">
             Everything we know it good will let you know too.
@@ -21,37 +21,39 @@ const Home: NextPage = () => {
           <button className="mt-8 bg-red-600 hover:bg-red-700 text-white py-4 px-10 rounded-md">
             I&apos;m hungry
           </button>
-          <div className="mt-24">
-            <div className="text-xl leading-7 font-semibold text-gray-600">
-              Featured Clients
-            </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4 w-32 mt-4">
-              {Array(4).fill(
-                <div className="w-12 h-12 bg-red-700 rounded-lg"></div>
-              )}
+          <div className="mt-24 flex justify-center md:justify-start">
+            <div>
+              <div className="text-xl leading-7 font-semibold text-gray-600">
+                Featured Clients
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:w-32 mt-4">
+                {Array(4).fill(
+                  <div className="w-12 h-12 bg-red-700 rounded-lg"></div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-        <div>
-          <Image
+        <div className="hidden lg:block">
+          <img
             src="https://static.remove.bg/remove-bg-web/bf554ca6716508caedc52f1ac289b1eec29b6734/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
             alt=""
             width="340"
             height="480"
-            className="object-cover"
+            className="object-cover w-[340px] h-[480px]"
           />
         </div>
       </div>
-      <div className="mt-14">
-        <div className="text-3xl leading-9 font-bold">Popular Restaurant</div>
-        <div className="mt-9 grid gap-x-4 grid-flow-col w-6/12">
-          <Image
+      <div className="mt-14 px-2 md:px-0">
+        <div className="text-3xl leading-9 font-bold text-center lg:text-left">
+          Popular Restaurant
+        </div>
+        <div className="mt-9 grid gap-x-4 w-full grid-flow-row lg:w-6/12 lg:grid-flow-col">
+          <img
             src="https://static.remove.bg/remove-bg-web/bf554ca6716508caedc52f1ac289b1eec29b6734/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
             alt="popular item"
-            width="256"
-            height="320"
-            className="object-cover col-span-2"
-          ></Image>
+            className="object-cover col-span-2 h-full"
+          />
           <div className="col-span-1">
             <div className="text-xl leading-8 font-semibold">
               Canada Breakfast Style
