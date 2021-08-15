@@ -1,0 +1,16 @@
+{
+  "React Functional Component": {
+    "prefix": "react functional component",
+    "body": [
+      "import { FunctionComponent } from \"react\";",
+      "type ${1:Props} = {",
+      "};",
+      "",
+      "const ${2:CustomComponent}: FunctionComponent<${1:Props}> = (props) => {",
+      "\treturn(<div><p>hello</p></div>);",
+      "};",
+      "",
+      "export default ${2:CustomComponent}"
+    ]
+  }
+}
