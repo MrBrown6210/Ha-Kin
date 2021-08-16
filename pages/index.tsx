@@ -75,7 +75,7 @@ const Home: NextPage = () => {
           <div className="text-3xl leading-9 font-bold px-2 lg:px-0">
             Let’s see what you love
           </div>
-          <div className="flex space-x-2 mt-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-6 mt-5">
             {Array(4).fill(
               <RestaurantCard
                 restaurant={{
