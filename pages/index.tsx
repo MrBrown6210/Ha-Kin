@@ -2,8 +2,25 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import RestaurantCard from "../components/RestaurantCard";
+import FeatureClientList from "../components/FeatureClientList";
+import useSWR from "swr";
+import { fetcher } from "../lib/fetcher";
+import { IRestaurant } from "../lib/api.interface";
 
-const Home: NextPage = () => {
+type Props = {
+  restaurants: IRestaurant[];
+};
+
+export async function getServerSideProps(): Promise<{ props: Props }> {
+  const restaurants: IRestaurant[] = await fetcher("restaurants");
+  return { props: { restaurants } };
+}
+
+const Home: NextPage<Props> = (props) => {
+  const { data: restaurants, error } = useSWR("restaurants", {
+    initialData: props.restaurants,
+  });
+  if (error) return <div>{error}</div>;
   return (
     <div className="md:pl-32 md:pr-28 mb-3">
       <div className="flex justify-between">
@@ -27,17 +44,13 @@ const Home: NextPage = () => {
               <div className="text-xl leading-7 font-semibold text-gray-600">
                 Featured Clients
               </div>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:w-32 mt-4">
-                {Array(4).fill(
-                  <div className="w-12 h-12 bg-red-700 rounded-lg"></div>
-                )}
-              </div>
+              <FeatureClientList></FeatureClientList>
             </div>
           </div>
         </div>
         <div className="hidden lg:block">
           <img
-            src="https://static.remove.bg/remove-bg-web/bf554ca6716508caedc52f1ac289b1eec29b6734/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
+            src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
             alt=""
             width="340"
             height="480"
@@ -51,9 +64,9 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-9 grid gap-x-4 w-full grid-flow-row lg:w-6/12 lg:grid-flow-col">
           <img
-            src="https://static.remove.bg/remove-bg-web/bf554ca6716508caedc52f1ac289b1eec29b6734/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
+            src="https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
             alt="popular item"
-            className="object-cover col-span-2 h-full"
+            className="object-cover col-span-1"
           />
           <div className="col-span-1 px-2 lg:px-0">
             <div className="text-xl leading-8 font-semibold">
@@ -76,16 +89,15 @@ const Home: NextPage = () => {
             Let’s see what you love
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-6 mt-5">
-            {Array(4).fill(
-              <RestaurantCard
-                restaurant={{
-                  title: "TitleX",
-                  stars: 5,
-                  reviewers: 2000,
-                  tags: ["a", "b"],
-                  averageCost: 3,
-                }}
-              ></RestaurantCard>
+            {restaurants === undefined ? (
+              <div>Loading</div>
+            ) : (
+              restaurants.map((restaurant) => (
+                <RestaurantCard
+                  key={restaurant.id}
+                  restaurant={restaurant}
+                ></RestaurantCard>
+              ))
             )}
           </div>
         </div>

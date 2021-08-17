@@ -1,6 +1,11 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }: any) {
+  const router = useRouter();
+  const gotoHome = () => {
+    router.push("/");
+  };
   return (
     <>
       <Head>
@@ -9,7 +14,13 @@ export default function Layout({ children }: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className=" h-24 border-b-[1px] border-gray-200 mx-24"></div>
+        <img
+          src="/logo.png"
+          alt="ha kin"
+          className="h-24 pt-5 ml-24 cursor-pointer"
+          onClick={gotoHome}
+        />
+        <div className="border-b-[1px] border-gray-200 mx-40"></div>
         <div>{children}</div>
       </main>
     </>
