@@ -5,7 +5,7 @@ export interface IClient {
 
 export interface IRestaurant {
   id: string;
-  title: string;
+  name: string;
   slug: string;
   stars: number;
   reviewers: number;

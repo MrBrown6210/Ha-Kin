@@ -21,7 +21,7 @@ export default function Layout({ children }: any) {
           onClick={gotoHome}
         />
         <div className="border-b-[1px] border-gray-200 mx-40"></div>
-        <div>{children}</div>
+        <div className="pb-5">{children}</div>
       </main>
     </>
   );

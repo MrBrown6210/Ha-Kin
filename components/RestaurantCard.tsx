@@ -9,7 +9,7 @@ export type RestaurantProps = {
 const RestaurantCard: FunctionComponent<RestaurantProps> = ({ restaurant }) => {
   return (
     <div>
-      <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
+      <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-none md:rounded-lg">
         <Link href={`/restaurants/${restaurant.slug}`}>
           <a>
             <img
@@ -20,10 +20,10 @@ const RestaurantCard: FunctionComponent<RestaurantProps> = ({ restaurant }) => {
           </a>
         </Link>
       </div>
-      <div className="mt-2">
+      <div className="mt-2 px-2 md:px-0">
         <Link href={`/restaurants/${restaurant.slug}`}>
           <a className="text-lg leading-6 font-semibold hover:underline">
-            {restaurant.title}
+            {restaurant.name}
           </a>
         </Link>
         <div className="flex mt-1">
