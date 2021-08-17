@@ -46,13 +46,23 @@ const RestaurantCard: FunctionComponent<RestaurantProps> = ({ restaurant }) => {
         </div>
         <div className="mt-1 text-gray-700">{restaurant.tags.join(", ")}</div>
         <div className="flex space-x-1">
-          {[...Array(restaurant.averageCost)].map((_, i) => {
-            return <div key={i}>$</div>;
-          })}
+          {[...Array(getAverageCostRange(restaurant.averageCost))].map(
+            (_, i) => {
+              return <div key={i}>$</div>;
+            }
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+const getAverageCostRange = (averageCost: number) => {
+  if (averageCost < 150) return 1;
+  if (averageCost < 250) return 2;
+  if (averageCost < 350) return 3;
+  if (averageCost < 450) return 4;
+  return 5;
 };
 
 export default RestaurantCard;
