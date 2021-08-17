@@ -12,4 +12,8 @@ export interface IRestaurant {
   tags: string[];
   averageCost: number;
   coverImageURL: string;
+  images: string[];
+  phoneNumber: string;
+  address: string;
+  facilities: string[];
 }

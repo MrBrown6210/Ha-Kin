@@ -65,22 +65,22 @@ const Restaurant: NextPage<Props> = (props) => {
       <div className="mt-5 block space-y-2 md:space-y-0 md:grid md:grid-rows-2 md:grid-flow-col md:gap-3">
         <img
           className="row-span-2 col-span-2 rounded-none md:rounded-2xl"
-          src={restaurant.coverImageURL}
+          src={restaurant.images[0]}
           alt={restaurant.name}
         />
         <img
           className="rounded-none md:rounded-2xl"
-          src={restaurant.coverImageURL}
+          src={restaurant.images[1]}
           alt={restaurant.name}
         />
         <div className="relative rounded-none md:rounded-2xl overflow-hidden">
           <div className="hidden md:flex absolute w-full h-full bg-black bg-opacity-40 items-center justify-center">
             <div className="text-white">View Gallery</div>
           </div>
-          <img src={restaurant.coverImageURL} alt={restaurant.name} />
+          <img src={restaurant.images[2]} alt={restaurant.name} />
         </div>
       </div>
-      <div className="flex justify-between mt-14">
+      <div className="flex justify-between mt-14 px-2 md:px-0">
         <div className="text-3xl leading-9 font-bold">Overview</div>
         <div>
           <div className="flex">
@@ -101,75 +101,45 @@ const Restaurant: NextPage<Props> = (props) => {
           <div className="text-sm text-gray-600 text-right">Your star</div>
         </div>
       </div>
-      <div className="mt-14">
+      <div className="mt-14 px-2 md:px-0">
         <div className="text-lg leading-6 font-semibold">Contact</div>
         <div className="mt-2">
-          <a className="text-red-600 hover:underline">084-2934122</a>
+          <a
+            className="text-red-600 hover:underline"
+            href={`tel:${restaurant.phoneNumber}`}
+          >
+            {restaurant.phoneNumber}
+          </a>
         </div>
-        <div className="mt-1 leading-6">
-          17B, Ground Floor, Bazar Marg, Old Rajinder Nagar, Rajinder Nagar, New
-          Delhi
-        </div>
+        <div className="mt-1 leading-6">{restaurant.address}</div>
         <div className="mt-16">
           <div className="text-lg leading-6 font-semibold">Average Cost</div>
           <div className="mt-2 leading-6">
-            500 baht for two people (approx.)
+            {restaurant.averageCost * 2} baht for two people (approx.)
           </div>
         </div>
         <div className="mt-16">
           <div className="text-lg leading-6 font-semibold">More Info</div>
           <div className="space-y-2 mt-2">
-            <div className="flex space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <div>wow</div>
-            </div>
-            <div className="flex space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <div>wow</div>
-            </div>
-            <div className="flex space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <div>wow</div>
-            </div>
+            {restaurant.facilities.map((facility) => (
+              <div key={facility} className="flex space-x-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-green-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <div>{facility}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
