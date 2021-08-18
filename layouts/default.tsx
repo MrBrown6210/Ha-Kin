@@ -16,15 +16,24 @@ export default function Layout({ children }: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="flex justify-between mx-24">
+        <div
+          className="flex justify-between items-center"
+          style={{ paddingLeft: "6rem", paddingRight: "6rem" }}
+        >
           <img
             src="/logo.png"
             alt="ha kin"
-            className="h-24 pt-5 ml-24 cursor-pointer"
+            className="h-24 pt-5 cursor-pointer"
             onClick={gotoHome}
           />
           <div>
-            <button onClick={() => auth.logout()}>Logout</button>
+            <button
+              className="border-2 rounded-md border-red-600"
+              style={{ paddingLeft: "0.25rem", paddingRight: "0.25rem" }}
+              onClick={() => auth.logout()}
+            >
+              Logout
+            </button>
           </div>
         </div>
         <div className="border-b-[1px] border-gray-200 mx-40"></div>
