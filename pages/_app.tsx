@@ -6,6 +6,7 @@ import { fetcher } from "../lib/fetcher";
 import { FunctionComponent } from "react";
 import { NextPage } from "next";
 import { AuthProvider } from "../contexts/auth";
+import { Provider as ReduxProvider } from "react-redux";
 
 require("../mocks");
 
@@ -18,11 +19,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.layout || DefaultLayout;
   return (
     <SWRConfig value={{ fetcher }}>
-      <AuthProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </AuthProvider>
+      <ReduxProvider>
+        <AuthProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthProvider>
+      </ReduxProvider>
     </SWRConfig>
   );
 }
