@@ -4,8 +4,9 @@ import styles from "../styles/Home.module.css";
 import RestaurantCard from "../components/RestaurantCard";
 import FeatureClientList from "../components/FeatureClientList";
 import useSWR from "swr";
-import { fetcher } from "../lib/fetcher";
+import { axios, fetcher } from "../lib/fetcher";
 import { IRestaurant } from "../lib/api.interface";
+import { useRouter } from "next/router";
 
 type Props = {
   restaurants: IRestaurant[];
@@ -17,9 +18,18 @@ export async function getServerSideProps(): Promise<{ props: Props }> {
 }
 
 const Home: NextPage<Props> = (props) => {
+  const router = useRouter();
   const { data: restaurants, error } = useSWR("restaurants", {
     initialData: props.restaurants,
   });
+
+  const goToRandomRestaurant = async () => {
+    const { data: restaurant } = await axios.get<IRestaurant>(
+      "randoms/restaurant"
+    );
+    router.push(`restaurants/${restaurant.slug}`);
+  };
+
   if (error) return <div>{error}</div>;
   return (
     <div className="md:pl-32 md:pr-28 mb-3">
@@ -36,7 +46,10 @@ const Home: NextPage<Props> = (props) => {
               Platform for food lover like you.
             </span>
           </div>
-          <button className="mt-8 bg-red-600 hover:bg-red-700 text-white py-4 px-10 rounded-md">
+          <button
+            onClick={() => goToRandomRestaurant()}
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white py-4 px-10 rounded-md"
+          >
             I&apos;m hungry
           </button>
           <div className="mt-24 flex justify-center md:justify-start">

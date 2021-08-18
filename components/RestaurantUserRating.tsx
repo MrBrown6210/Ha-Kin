@@ -17,7 +17,7 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
     setCurrentStars(stars);
     try {
       const { data: updatedStars } = await axios.patch<number>(
-        `restaurant/${props.restaurant.slug}/stars`,
+        `restaurants/${props.restaurant.slug}/stars`,
         {
           stars,
         }

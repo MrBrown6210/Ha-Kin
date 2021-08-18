@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { IUser } from "../lib/api.interface";
+import { IRestaurant, IUser } from "../lib/api.interface";
 import { clients } from "./fixtures/feature-clients";
 import { getRestaurants } from "./fixtures/restaurants";
 import { getUsers } from "./fixtures/users";
@@ -51,10 +51,20 @@ export const handlers = [
     return res(ctx.delay(), ctx.json(restaurant));
   }),
   rest.patch<{ stars: number }>(
-    `${MOCK_API}/restaurant/:slug/stars`,
+    `${MOCK_API}/restaurants/:slug/stars`,
     (req, res, ctx) => {
       const { stars } = req.body;
       return res(ctx.delay(1000), ctx.json(stars));
+    }
+  ),
+  rest.get<any, IRestaurant>(
+    `${MOCK_API}/randoms/restaurant`,
+    (req, res, ctx) => {
+      const restaurants = getRestaurants();
+      const randomIndex = Math.floor(Math.random() * restaurants.length);
+      const restaurant = restaurants[randomIndex];
+
+      return res(ctx.delay(), ctx.json(restaurant));
     }
   ),
 ];
