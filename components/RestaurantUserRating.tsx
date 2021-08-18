@@ -1,5 +1,7 @@
+import { AxiosError } from "axios";
 import { FunctionComponent, useState } from "react";
 import { IRestaurant } from "../lib/api.interface";
+import Axios from "axios";
 import { axios, fetcher } from "../lib/fetcher";
 type Props = {
   restaurant: IRestaurant;
@@ -20,8 +22,13 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
         }
       );
       setCurrentStars(updatedStars);
-    } catch (error) {
+    } catch (err) {
       setCurrentStars(props.restaurant.stars);
+      if (Axios.isAxiosError(err)) {
+        alert(err.message);
+      } else {
+        console.error(err);
+      }
     }
   };
 
