@@ -7,6 +7,8 @@ import { FunctionComponent } from "react";
 import { NextPage } from "next";
 import { AuthProvider } from "../contexts/auth";
 import { Provider as ReduxProvider } from "react-redux";
+import { store } from "../store";
+import Modal from "../components/Modal";
 
 require("../mocks");
 
@@ -19,8 +21,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.layout || DefaultLayout;
   return (
     <SWRConfig value={{ fetcher }}>
-      <ReduxProvider>
+      <ReduxProvider store={store}>
         <AuthProvider>
+          <Modal></Modal>
           <Layout>
             <Component {...pageProps} />
           </Layout>

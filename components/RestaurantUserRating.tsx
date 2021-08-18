@@ -3,17 +3,22 @@ import { FunctionComponent, useState } from "react";
 import { IRestaurant } from "../lib/api.interface";
 import Axios from "axios";
 import { axios, fetcher } from "../lib/fetcher";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../store/modalReducer";
 type Props = {
   restaurant: IRestaurant;
 };
 
 const RestaurantUserRating: FunctionComponent<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const initStars = props.restaurant.user?.stars ?? 0;
   const [currentStars, setCurrentStars] = useState(initStars);
 
   const [hoverStars, setHoverStars] = useState<number | null>(0);
 
   const updateStars = async (stars: number) => {
+    dispatch(setMessage({ message: "wow" }));
     setCurrentStars(stars);
     try {
       const { data: updatedStars } = await axios.patch<number>(
