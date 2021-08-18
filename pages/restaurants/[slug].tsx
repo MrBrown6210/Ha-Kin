@@ -64,21 +64,31 @@ const Restaurant: NextPage<Props> = (props) => {
         </div>
       </div>
       <div className="mt-5 block space-y-2 md:space-y-0 md:grid md:grid-rows-2 md:grid-flow-col md:gap-3">
-        <img
-          className="row-span-2 col-span-2 rounded-none md:rounded-2xl"
-          src={restaurant.images[0]}
-          alt={restaurant.name}
-        />
-        <img
-          className="rounded-none md:rounded-2xl"
-          src={restaurant.images[1]}
-          alt={restaurant.name}
-        />
-        <div className="relative rounded-none md:rounded-2xl overflow-hidden">
-          <div className="hidden md:flex absolute w-full h-full bg-black bg-opacity-40 items-center justify-center">
-            <div className="text-white">View Gallery</div>
+        <div className="aspect-w-16 aspect-h-9 row-span-2 col-span-2">
+          <img
+            className="rounded-none md:rounded-2xl object-cover"
+            src={restaurant.images[0]}
+            alt={restaurant.name}
+          />
+        </div>
+        <div className="aspect-w-16 aspect-h-9">
+          <img
+            className="rounded-none md:rounded-2xl object-cover"
+            src={restaurant.images[1]}
+            alt={restaurant.name}
+          />
+        </div>
+        <div className="aspect-w-16 aspect-h-9 rounded-none md:rounded-2xl overflow-hidden">
+          <div className="">
+            <img
+              src={restaurant.images[2]}
+              alt={restaurant.name}
+              className="object-cover"
+            />
           </div>
-          <img src={restaurant.images[2]} alt={restaurant.name} />
+          <div className="text-white bg-black bg-opacity-60 flex justify-center items-center">
+            View Gallery
+          </div>
         </div>
       </div>
       <div className="flex justify-between mt-14 px-2 md:px-0">
