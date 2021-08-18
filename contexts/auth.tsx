@@ -32,6 +32,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+
   useEffect(() => {
     async function loadUserFromCookies() {
       const token = Cookies.get("token");
@@ -58,7 +60,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
       const { data: user } = await axios.get("users/me");
       setUser(user);
       console.log("Got user", user);
-      window.location.pathname = "/";
+      router.push("/");
     }
   };
 
@@ -66,7 +68,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     Cookies.remove("token");
     setUser(null);
     delete axios.defaults.headers.Authorization;
-    window.location.pathname = "/login";
+    router.push("/login");
   };
 
   return (
