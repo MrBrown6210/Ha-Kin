@@ -55,7 +55,7 @@ export const handlers = [
     `${MOCK_API}/restaurants/:slug/stars`,
     (req, res, ctx) => {
       const { stars } = req.body;
-      return res(ctx.delay(1000), ctx.json(stars));
+      return res(ctx.delay(), ctx.json(stars));
     }
   ),
   rest.get<any, IRestaurant>(

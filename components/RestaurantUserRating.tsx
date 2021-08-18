@@ -18,7 +18,6 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
   const [hoverStars, setHoverStars] = useState<number | null>(0);
 
   const updateStars = async (stars: number) => {
-    dispatch(setMessage({ message: "wow" }));
     setCurrentStars(stars);
     try {
       const { data: updatedStars } = await axios.patch<number>(
@@ -31,7 +30,7 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
     } catch (err) {
       setCurrentStars(initStars);
       if (Axios.isAxiosError(err)) {
-        alert(err.message);
+        dispatch(setMessage({ message: err.message, type: "alert" }));
       } else {
         console.error(err);
       }
