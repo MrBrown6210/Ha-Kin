@@ -66,14 +66,16 @@ const Restaurant: NextPage<Props> = (props) => {
       <div className="mt-5 block space-y-2 md:space-y-0 md:grid md:grid-rows-2 md:grid-flow-col md:gap-3">
         <div className="aspect-w-16 aspect-h-9 row-span-2 col-span-2">
           <img
-            className="rounded-none md:rounded-2xl object-cover"
+            loading="lazy"
+            className="rounded-none md:rounded-2xl object-cover bg-gray-100"
             src={restaurant.images[0]}
             alt={restaurant.name}
           />
         </div>
         <div className="aspect-w-16 aspect-h-9">
           <img
-            className="rounded-none md:rounded-2xl object-cover"
+            loading="lazy"
+            className="rounded-none md:rounded-2xl object-cover bg-gray-100"
             src={restaurant.images[1]}
             alt={restaurant.name}
           />
@@ -81,9 +83,10 @@ const Restaurant: NextPage<Props> = (props) => {
         <div className="aspect-w-16 aspect-h-9 rounded-none md:rounded-2xl overflow-hidden">
           <div className="">
             <img
+              loading="lazy"
               src={restaurant.images[2]}
               alt={restaurant.name}
-              className="object-cover"
+              className="object-cover bg-gray-100"
             />
           </div>
           <div className="text-white bg-black bg-opacity-60 flex justify-center items-center">
