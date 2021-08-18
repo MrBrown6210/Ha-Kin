@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { clearMessage } from "../store/modalReducer";
@@ -8,14 +8,15 @@ const ModalComponent: FunctionComponent<Props> = (props) => {
   const message = useSelector((state: RootState) => state.modal.message);
   const type = useSelector((state: RootState) => state.modal.type);
   const dispatch = useDispatch();
+
   if (!message) return <div></div>;
   if (!type) return <div></div>;
 
-  const color = type === "info" ? "green-400" : "red-400";
-
   return (
     <div
-      className={`bg-white rounded-sm shadow-xl w-3/12 fixed bottom-4 right-4 border-[1px] border-${color} overflow-hidden z-10`}
+      className={`bg-white rounded-sm shadow-xl w-3/12 fixed bottom-4 right-4 border-[1px] ${
+        type === "info" ? "border-green-400" : "border-red-600"
+      } overflow-hidden z-10`}
     >
       <div className="flex justify-between items-center px-4">
         <div className="px-2 py-4">{message}</div>
@@ -37,7 +38,11 @@ const ModalComponent: FunctionComponent<Props> = (props) => {
           </svg>
         </div>
       </div>
-      <div className={`absolute w-full h-1 bottom-0 bg-${color}`}></div>
+      <div
+        className={`absolute w-full h-1 bottom-0 ${
+          type === "info" ? "bg-green-400" : "bg-red-600"
+        }`}
+      ></div>
     </div>
   );
 };
