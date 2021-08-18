@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FormEvent, FunctionComponent } from "react";
+import { FormEvent, FunctionComponent, useEffect } from "react";
 import { useAuth } from "../contexts/auth";
 import NoHeader from "../layouts/no-header";
 import { IUser } from "../lib/api.interface";
@@ -15,6 +15,13 @@ type Page = NextPage<Props> & { layout?: FunctionComponent };
 const LoginPage: Page = (props) => {
   const router = useRouter();
   const auth = useAuth();
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      router.push("/");
+    }
+  });
+
   const login = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);

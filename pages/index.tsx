@@ -7,6 +7,8 @@ import useSWR from "swr";
 import { axios, fetcher } from "../lib/fetcher";
 import { IRestaurant } from "../lib/api.interface";
 import { useRouter } from "next/router";
+import { useAuth } from "../contexts/auth";
+import { useEffect } from "react";
 
 type Props = {
   restaurants: IRestaurant[];
@@ -19,6 +21,14 @@ export async function getServerSideProps(): Promise<{ props: Props }> {
 
 const Home: NextPage<Props> = (props) => {
   const router = useRouter();
+  const auth = useAuth();
+
+  useEffect(() => {
+    if (!auth.isAuthenticated) {
+      router.push("/login");
+    }
+  });
+
   const { data: restaurants, error } = useSWR("restaurants", {
     initialData: props.restaurants,
   });
@@ -27,7 +37,7 @@ const Home: NextPage<Props> = (props) => {
     const { data: restaurant } = await axios.get<IRestaurant>(
       "randoms/restaurant"
     );
-    router.push(`restaurants/${restaurant.slug}`);
+    router.push(`/restaurants/${restaurant.slug}`);
   };
 
   if (error) return <div>{error}</div>;

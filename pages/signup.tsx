@@ -1,11 +1,12 @@
 import { NextPage } from "next";
-import React, { FormEvent, FunctionComponent } from "react";
+import React, { FormEvent, FunctionComponent, useEffect } from "react";
 import NoHeader from "../layouts/no-header";
 import login from "./login";
 import Link from "next/link";
 import { axios } from "../lib/fetcher";
 import { IUser } from "../lib/api.interface";
 import { useAuth } from "../contexts/auth";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -13,6 +14,14 @@ type Page = NextPage<Props> & { layout?: FunctionComponent };
 
 const SignupPage: Page = (props) => {
   const auth = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      router.push("/");
+    }
+  });
+
   const signup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
