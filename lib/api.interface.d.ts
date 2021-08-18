@@ -26,3 +26,15 @@ export interface IUser {
   name: string;
   email: string;
 }
+
+export interface IMenu {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  restaurant: {
+    id: string;
+    slug: string;
+    name: string;
+  };
+}

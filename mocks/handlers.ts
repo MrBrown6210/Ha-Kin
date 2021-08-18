@@ -1,6 +1,7 @@
 import { rest } from "msw";
-import { IRestaurant, IUser } from "../lib/api.interface";
+import { IMenu, IRestaurant, IUser } from "../lib/api.interface";
 import { clients } from "./fixtures/feature-clients";
+import { getMenuList } from "./fixtures/menuList";
 import { getRestaurants } from "./fixtures/restaurants";
 import { getUsers } from "./fixtures/users";
 
@@ -67,4 +68,8 @@ export const handlers = [
       return res(ctx.delay(), ctx.json(restaurant));
     }
   ),
+  rest.get<any, IMenu>(`${MOCK_API}/populars/menu`, (req, res, ctx) => {
+    const menu = getMenuList()[0];
+    return res(ctx.delay(), ctx.json(menu));
+  }),
 ];
