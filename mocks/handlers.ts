@@ -17,6 +17,16 @@ export const handlers = [
       return res(ctx.delay(), ctx.json(user));
     }
   ),
+  rest.post<{ name: string; email: string; password: string }, IUser>(
+    `${MOCK_API}/auth/signup`,
+    (req, res, ctx) => {
+      const { name, email, password } = req.body;
+      const users = getUsers();
+      const user = users.find((user) => user.email === email);
+      if (!user) return res(ctx.delay(), ctx.status(400));
+      return res(ctx.delay(), ctx.json(user));
+    }
+  ),
   rest.get(`${MOCK_API}/users/me`, (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ")[1];
     if (!token) return res(ctx.delay(), ctx.status(401));

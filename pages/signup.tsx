@@ -1,28 +1,30 @@
-import Cookies from "js-cookie";
 import { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { FormEvent, FunctionComponent } from "react";
-import { useAuth } from "../contexts/auth";
+import React, { FormEvent, FunctionComponent } from "react";
 import NoHeader from "../layouts/no-header";
-import { IUser } from "../lib/api.interface";
+import login from "./login";
+import Link from "next/link";
 import { axios } from "../lib/fetcher";
+import { IUser } from "../lib/api.interface";
+import { useAuth } from "../contexts/auth";
 
 type Props = {};
 
 type Page = NextPage<Props> & { layout?: FunctionComponent };
 
-const LoginPage: Page = (props) => {
-  const router = useRouter();
+const SignupPage: Page = (props) => {
   const auth = useAuth();
-  const login = async (e: FormEvent<HTMLFormElement>) => {
+  const signup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const form = Object.fromEntries(formData);
-    const { email, password } = form;
+    const { name, email, password } = form;
+    await axios.post<IUser>("auth/signup", {
+      name,
+      email,
+      password,
+    });
     await auth.login(email.toString(), password.toString());
   };
-
   return (
     <div>
       <div className="flex h-screen justify-center items-center">
@@ -32,8 +34,20 @@ const LoginPage: Page = (props) => {
               <div className="text-2xl leading-8 font-bold">
                 Log in to your account
               </div>
-              <form onSubmit={(e) => login(e)} className="mt-8">
+              <form onSubmit={(e) => signup(e)} className="mt-8">
                 <div>
+                  <div className="text-sm leading-5 font-medium text-gray-700">
+                    Name
+                  </div>
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Jone Smith"
+                    required={true}
+                    className="mt-1 px-3 py-2 w-11/12 rounded-lg border-[1px] border-gray-300"
+                  />
+                </div>
+                <div className="mt-7">
                   <div className="text-sm leading-5 font-medium text-gray-700">
                     Email
                   </div>
@@ -62,15 +76,15 @@ const LoginPage: Page = (props) => {
                     type="submit"
                     className="w-11/12 bg-indigo-500 py-2 text-center text-white rounded-lg"
                   >
-                    Login
+                    Get started!
                   </button>
                 </div>
               </form>
               <div className="text-gray-500 text-xs mt-2">
                 <p>
-                  New to THIP?{" "}
-                  <Link href="/signup">
-                    <a className="text-indigo-500">Sign Up</a>
+                  Already signed up?{" "}
+                  <Link href="/login">
+                    <a className="text-indigo-500">Login</a>
                   </Link>
                 </p>
               </div>
@@ -89,6 +103,6 @@ const LoginPage: Page = (props) => {
   );
 };
 
-LoginPage.layout = NoHeader;
+SignupPage.layout = NoHeader;
 
-export default LoginPage;
+export default SignupPage;
