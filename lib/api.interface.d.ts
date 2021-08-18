@@ -17,3 +17,9 @@ export interface IRestaurant {
   address: string;
   facilities: string[];
 }
+
+export interface IUser {
+  token: string;
+  name: string;
+  email: string;
+}

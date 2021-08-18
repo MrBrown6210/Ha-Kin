@@ -1,8 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useAuth } from "../contexts/auth";
 
 export default function Layout({ children }: any) {
   const router = useRouter();
+  const auth = useAuth();
   const gotoHome = () => {
     router.push("/");
   };
@@ -14,12 +16,17 @@ export default function Layout({ children }: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <img
-          src="/logo.png"
-          alt="ha kin"
-          className="h-24 pt-5 ml-24 cursor-pointer"
-          onClick={gotoHome}
-        />
+        <div className="flex justify-between mx-24">
+          <img
+            src="/logo.png"
+            alt="ha kin"
+            className="h-24 pt-5 ml-24 cursor-pointer"
+            onClick={gotoHome}
+          />
+          <div>
+            <button onClick={() => auth.logout()}>Logout</button>
+          </div>
+        </div>
         <div className="border-b-[1px] border-gray-200 mx-40"></div>
         <div className="pb-5">{children}</div>
       </main>

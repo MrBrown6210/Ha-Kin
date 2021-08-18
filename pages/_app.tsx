@@ -5,6 +5,7 @@ import { SWRConfig } from "swr";
 import { fetcher } from "../lib/fetcher";
 import { FunctionComponent } from "react";
 import { NextPage } from "next";
+import { AuthProvider } from "../contexts/auth";
 
 require("../mocks");
 
@@ -17,9 +18,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.layout || DefaultLayout;
   return (
     <SWRConfig value={{ fetcher }}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
     </SWRConfig>
   );
 }
