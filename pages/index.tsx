@@ -5,18 +5,20 @@ import RestaurantCard from "../components/RestaurantCard";
 import FeatureClientList from "../components/FeatureClientList";
 import useSWR from "swr";
 import { axios, fetcher } from "../lib/fetcher";
-import { IRestaurant } from "../lib/api.interface";
+import { IMenu, IRestaurant } from "../lib/api.interface";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/auth";
 import { useEffect } from "react";
 
 type Props = {
   restaurants: IRestaurant[];
+  popularMenu: IMenu;
 };
 
 export async function getServerSideProps(): Promise<{ props: Props }> {
   const restaurants: IRestaurant[] = await fetcher("restaurants");
-  return { props: { restaurants } };
+  const popularMenu: IMenu = await fetcher("populars/menu");
+  return { props: { restaurants, popularMenu } };
 }
 
 const Home: NextPage<Props> = (props) => {
@@ -29,8 +31,12 @@ const Home: NextPage<Props> = (props) => {
     }
   });
 
-  const { data: restaurants, error } = useSWR("restaurants", {
+  const { data: restaurants, error: errorRestaurant } = useSWR("restaurants", {
     initialData: props.restaurants,
+  });
+
+  const { data: popularMenu, error: errorMenu } = useSWR("populars/menu", {
+    initialData: props.popularMenu,
   });
 
   const goToRandomRestaurant = async () => {
@@ -40,7 +46,8 @@ const Home: NextPage<Props> = (props) => {
     router.push(`/restaurants/${restaurant.slug}`);
   };
 
-  if (error) return <div>{error}</div>;
+  if (errorRestaurant) return <div>{errorRestaurant}</div>;
+  if (errorMenu) return <div>{errorMenu}</div>;
   return (
     <div className="md:pl-32 md:pr-28 mb-3">
       <div className="flex justify-between">
@@ -81,6 +88,58 @@ const Home: NextPage<Props> = (props) => {
           />
         </div>
       </div>
+      {popularMenu ? (
+        <div className="mt-14">
+          <div className="text-3xl leading-9 font-bold text-center px-2 lg:px-0 lg:text-left">
+            Popular Restaurant
+          </div>
+          <div className="mt-9 grid gap-x-4 w-full grid-flow-row lg:w-6/12 lg:grid-flow-col">
+            <img
+              src={popularMenu.image}
+              alt="popular item"
+              className="object-cover col-span-1"
+            />
+            <div className="col-span-1 px-2 lg:px-0">
+              <div className="text-xl leading-8 font-semibold">
+                {popularMenu.name}
+              </div>
+              <div className="text-sm leading-5 font-semibold">
+                {popularMenu.restaurant.name}
+              </div>
+              <div className="mt-2 text-lg text-gray-700 leading-6">
+                {popularMenu.description}
+              </div>
+              <button
+                onClick={() => {
+                  router.push(`/restaurants/${popularMenu.restaurant.slug}`);
+                }}
+                className="mt-5 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md w-full lg:w-auto"
+              >
+                Choose here
+              </button>
+            </div>
+          </div>
+          <div className="mt-32">
+            <div className="text-3xl leading-9 font-bold px-2 lg:px-0">
+              Let’s see what you love
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-6 mt-5">
+              {restaurants === undefined ? (
+                <div>Loading</div>
+              ) : (
+                restaurants.map((restaurant) => (
+                  <RestaurantCard
+                    key={restaurant.id}
+                    restaurant={restaurant}
+                  ></RestaurantCard>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="mt-14">
         <div className="text-3xl leading-9 font-bold text-center px-2 lg:px-0 lg:text-left">
           Popular Restaurant
@@ -93,7 +152,7 @@ const Home: NextPage<Props> = (props) => {
           />
           <div className="col-span-1 px-2 lg:px-0">
             <div className="text-xl leading-8 font-semibold">
-              Canada Breakfast Style
+              {popularMenu?.name}
             </div>
             <div className="text-sm leading-5 font-semibold">STIL</div>
             <div className="mt-2 text-lg text-gray-700 leading-6">
