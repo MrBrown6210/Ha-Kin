@@ -8,6 +8,9 @@ export interface IRestaurant {
   name: string;
   slug: string;
   stars: number;
+  user?: {
+    stars: number;
+  };
   reviewers: number;
   tags: string[];
   averageCost: number;

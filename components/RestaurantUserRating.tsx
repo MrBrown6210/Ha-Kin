@@ -8,7 +8,8 @@ type Props = {
 };
 
 const RestaurantUserRating: FunctionComponent<Props> = (props) => {
-  const [currentStars, setCurrentStars] = useState(props.restaurant.stars);
+  const initStars = props.restaurant.user?.stars ?? 0;
+  const [currentStars, setCurrentStars] = useState(initStars);
 
   const [hoverStars, setHoverStars] = useState<number | null>(0);
 
@@ -23,7 +24,7 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
       );
       setCurrentStars(updatedStars);
     } catch (err) {
-      setCurrentStars(props.restaurant.stars);
+      setCurrentStars(initStars);
       if (Axios.isAxiosError(err)) {
         alert(err.message);
       } else {
