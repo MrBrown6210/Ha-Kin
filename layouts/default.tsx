@@ -23,7 +23,8 @@ export default function Layout({ children }: any) {
           <img
             src="/logo.png"
             alt="ha kin"
-            className="h-24 pt-5 cursor-pointer"
+            className="cursor-pointer"
+            style={{ height: "6rem", paddingTop: "1.25rem" }}
             onClick={gotoHome}
           />
           <div>
