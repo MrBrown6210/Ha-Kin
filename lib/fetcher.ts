@@ -12,7 +12,4 @@ export const axios = Axios.create({
 export const fetcher = async <T>(url: string, arg?: AxiosRequestConfig) => {
   const res = await axios.get(url, arg);
   return res.data;
-  // const api = url.startsWith("http") ? url : `${API_URL}/${url}`;
-  // const res = await fetch(api, arg);
-  // return await res.json();
 };
