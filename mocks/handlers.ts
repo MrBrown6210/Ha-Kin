@@ -40,4 +40,11 @@ export const handlers = [
     if (!restaurant) return res(ctx.delay(), ctx.status(404));
     return res(ctx.delay(), ctx.json(restaurant));
   }),
+  rest.patch<{ stars: number }>(
+    `${MOCK_API}/restaurant/:slug/stars`,
+    (req, res, ctx) => {
+      const { stars } = req.body;
+      return res(ctx.delay(1000), ctx.json(stars));
+    }
+  ),
 ];

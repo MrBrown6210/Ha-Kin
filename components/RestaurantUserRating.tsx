@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { IRestaurant } from "../lib/api.interface";
-import { fetcher } from "../lib/fetcher";
+import { axios, fetcher } from "../lib/fetcher";
 type Props = {
   restaurant: IRestaurant;
 };
@@ -10,8 +10,19 @@ const RestaurantUserRating: FunctionComponent<Props> = (props) => {
 
   const [hoverStars, setHoverStars] = useState<number | null>(0);
 
-  const updateStars = (stars: number) => {
+  const updateStars = async (stars: number) => {
     setCurrentStars(stars);
+    try {
+      const { data: updatedStars } = await axios.patch<number>(
+        `restaurant/${props.restaurant.slug}/stars`,
+        {
+          stars,
+        }
+      );
+      setCurrentStars(updatedStars);
+    } catch (error) {
+      setCurrentStars(props.restaurant.stars);
+    }
   };
 
   return (
