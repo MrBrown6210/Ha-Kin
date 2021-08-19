@@ -140,50 +140,6 @@ const Home: NextPage<Props> = (props) => {
       ) : (
         ""
       )}
-      <div className="mt-14">
-        <div className="text-3xl leading-9 font-bold text-center px-2 lg:px-0 lg:text-left">
-          Popular Restaurant
-        </div>
-        <div className="mt-9 grid gap-x-4 w-full grid-flow-row lg:w-6/12 lg:grid-flow-col">
-          <img
-            src="https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            alt="popular item"
-            className="object-cover col-span-1"
-          />
-          <div className="col-span-1 px-2 lg:px-0">
-            <div className="text-xl leading-8 font-semibold">
-              {popularMenu?.name}
-            </div>
-            <div className="text-sm leading-5 font-semibold">STIL</div>
-            <div className="mt-2 text-lg text-gray-700 leading-6">
-              Bacon ipsum dolor amet tongue tail landjaeger, turkey filet mignon
-              pork loin pancetta. Swine chicken biltong beef ribs. Drumstick
-              pork chop boudin landjaeger frankfurter picanha chuck fatback ham
-              hamburger chicken tenderloin salami doner rump.
-            </div>
-            <button className="mt-5 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md w-full lg:w-auto">
-              Choose here
-            </button>
-          </div>
-        </div>
-        <div className="mt-32">
-          <div className="text-3xl leading-9 font-bold px-2 lg:px-0">
-            Let’s see what you love
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-6 mt-5">
-            {restaurants === undefined ? (
-              <div>Loading</div>
-            ) : (
-              restaurants.map((restaurant) => (
-                <RestaurantCard
-                  key={restaurant.id}
-                  restaurant={restaurant}
-                ></RestaurantCard>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
