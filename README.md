@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ha Kin
 
-## Getting Started
+Ha Kin is my awesome project created to understand the power of [NextJS](https://nextjs.org/) with TypeScript
 
-First, run the development server:
+## Demo
 
-```bash
-npm run dev
-# or
+Demo: [www.google.com](https://google.com)
+
+email: user1@gmail.com
+password can be something.
+
+## Get Started
+
+First, install dependencies
+
+```
+yarn install
+```
+
+Second, run development server
+
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000/) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Screenshot
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## What I've Learned
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [x] Page
+- [x] Component & Prop
+- [x] Dynamic Layout
+- [x] Tailwind (for NextJS)
+- [x] Fetching API and [SWR](https://swr.vercel.app/)
+- [x] [Mock Service Worker](https://mswjs.io/)
+- [x] Authentication
+- [x] Guard Routing
+- [x] Redux and Redux-toolkit
+- [ ] Transition
 
-## Learn More
+## Issue
 
-To learn more about Next.js, take a look at the following resources:
+- When you open website for a while you will see error because fetching API from service worker, **reload** the website for fix it.
+- Guard routing doing wrong, maybe should use other method.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Screenshot
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Home
 
-## Deploy on Vercel
+![home](./documents/screenshots/home.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Restaurant detail
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![detail](./documents/screenshots/restaurant.png)
+
+### Login
+
+![detail](./documents/screenshots/login.png)
+
+### Sign up
+
+![detail](./documents/screenshots/signup.png)
