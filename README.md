@@ -4,10 +4,10 @@ Ha Kin is my awesome project created to understand the power of [NextJS](https:/
 
 ## Demo
 
-Demo: [www.google.com](https://google.com)
+Demo: [https://ha-kin.herokuapp.com](https://ha-kin.herokuapp.com)
 
-email: user1@gmail.com
-password can be something.
+email: user1@gmail.com\
+password can be anything.
 
 ## Get Started
 
@@ -24,8 +24,6 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000/) with your browser to see the result.
-
-## Screenshot
 
 ## What I've Learned
 
