@@ -41,7 +41,7 @@ const SignupPage: Page = (props) => {
           <div className="flex">
             <div className="flex-1 p-7">
               <div className="text-2xl leading-8 font-bold">
-                Log in to your account
+                Get start with Ha Kin
               </div>
               <form onSubmit={(e) => signup(e)} className="mt-8">
                 <div>
